@@ -14,7 +14,8 @@ import {
   Dashboard as DashboardIcon,
   ShoppingCart as ShoppingCartIcon,
   Receipt as ReceiptIcon,
-  Category as CategoryIcon, // Icon cho Product
+  Category as CategoryIcon,
+  Inventory as InventoryIcon, // Changed icon for Products
   People as PeopleIcon,
   Comment as CommentIcon,
 } from "@mui/icons-material";
@@ -53,52 +54,54 @@ const sidebarContent = (
   <div>
     <Toolbar>
       <Typography variant="h6" noWrap>
-        Dashboard
+        Admin Dashboard
       </Typography>
     </Toolbar>
     <Divider />
     <List>
-      <ListItemButton component={Link} to="/">
+      <ListItemButton component={Link} to="/admin">
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItemButton>
 
-      <ListItemButton component={Link} to="/orders">
+      <ListItemButton component={Link} to="/admin/orders">
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
         <ListItemText primary="Orders" />
       </ListItemButton>
 
-      <ListItemButton component={Link} to="/customers">
+      <ListItemButton component={Link} to="/admin/customers">
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="Customers" />
       </ListItemButton>
-      <ListItemButton component={Link} to="/products">
+
+      <ListItemButton component={Link} to="/admin/products">
         <ListItemIcon>
-          <CategoryIcon />
+          <InventoryIcon />
         </ListItemIcon>
         <ListItemText primary="Products" />
       </ListItemButton>
-      <ListItemButton component={Link} to="/categories">
+
+      <ListItemButton component={Link} to="/admin/categories">
         <ListItemIcon>
           <CategoryIcon />
         </ListItemIcon>
         <ListItemText primary="Categories" />
       </ListItemButton>
 
-      <ListItemButton component={Link} to="/invoices">
+      <ListItemButton component={Link} to="/admin/invoices">
         <ListItemIcon>
           <ReceiptIcon />
         </ListItemIcon>
         <ListItemText primary="Invoices" />
       </ListItemButton>
 
-      <ListItemButton component={Link} to="/reviews">
+      <ListItemButton component={Link} to="/admin/reviews">
         <ListItemIcon>
           <CommentIcon />
         </ListItemIcon>

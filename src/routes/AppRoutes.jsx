@@ -16,7 +16,7 @@ import ProductEdit from "../components/product/ProductEdit.jsx";
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/admin" element={<MainLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="orders" element={<Orders />} />
         <Route path="orders/:id" element={<OrderDetail />} />
@@ -29,7 +29,7 @@ function AppRoutes() {
         <Route path="products/new" element={<ProductForm />} />
         <Route path="products" element={<Product />} />
         <Route
-          path="/products/edit/:id"
+          path="products/edit/:id"
           element={<ProductEdit></ProductEdit>}></Route>
         <Route path="categories" element={<Categories />} />
         <Route path="categories/new" element={<CategoriesForm />} />
