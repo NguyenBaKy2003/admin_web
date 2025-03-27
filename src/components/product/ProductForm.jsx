@@ -166,7 +166,7 @@ function ProductForm() {
         autoClose: 3000,
       });
 
-      setTimeout(() => navigate("/products"), 3000);
+      setTimeout(() => navigate("/admin/products"), 3000);
     } catch (error) {
       console.error("Lỗi khi thêm sản phẩm:", error);
       toast.error("Thêm sản phẩm thất bại!", {

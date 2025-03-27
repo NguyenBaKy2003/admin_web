@@ -51,7 +51,7 @@ function CategoriesForm() {
         await axios.post(API_URL, categoryData);
         alert("Thêm danh mục thành công!");
       }
-      navigate("/categories");
+      navigate("/admin/categories");
     } catch (error) {
       console.error("Lỗi:", error);
       alert("Có lỗi xảy ra!");

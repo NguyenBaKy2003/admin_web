@@ -363,9 +363,9 @@ function ProductEdit() {
 
       toast.success("Cập nhật sản phẩm thành công!", {
         ...toastConfig,
-        onClose: () => navigate("/products"),
+        onClose: () => navigate("/admin/products"),
       });
-      setTimeout(() => navigate("/products"), 2000);
+      setTimeout(() => navigate("/admin/products"), 2000);
     } catch (error) {
       console.error("Error updating product:", error);
       const errorMessage =

@@ -28,7 +28,7 @@ function CategoryList() {
   };
 
   const handleEdit = (id) => {
-    navigate(`/categories-form/${id}`);
+    navigate(`/admin/categories/${id}`);
   };
 
   const handleDelete = async (id) => {
@@ -52,7 +52,7 @@ function CategoryList() {
 
       {/* Nút chuyển đến trang thêm danh mục */}
       <button
-        onClick={() => navigate("/categories/new")}
+        onClick={() => navigate("/admin/categories/new")}
         className="w-full bg-blue-500 text-white py-2 rounded mb-4">
         Thêm danh mục
       </button>
