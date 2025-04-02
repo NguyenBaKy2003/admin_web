@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_URL = "http://localhost:8080/api/orders";
+const API_URL = "https://45.122.253.163:8891/api/orders";
 const ORDER_STATUSES = [
   "PENDING",
   "PROCESSING",
@@ -97,7 +97,7 @@ function OrderDetail() {
         <p className="text-center text-gray-600 p-8">Không tìm thấy đơn hàng</p>
         <button
           className="w-full bg-blue-600 text-white font-medium px-5 py-2 rounded-lg shadow-md hover:bg-blue-700 transition"
-          onClick={() => navigate("/orders")}>
+          onClick={() => navigate("/admin/orders")}>
           ⬅ Quay lại
         </button>
       </div>
@@ -291,7 +291,7 @@ function OrderDetail() {
       <div className="flex justify-between">
         <button
           className="bg-gray-200 text-gray-700 font-medium px-6 py-2 rounded-lg hover:bg-gray-300 transition flex items-center"
-          onClick={() => navigate("/orders")}>
+          onClick={() => navigate("/admin/orders")}>
           ⬅ Quay lại danh sách
         </button>
 

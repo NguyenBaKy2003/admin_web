@@ -16,7 +16,9 @@ function Reviews() {
   const fetchReviews = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8080/api/reviews");
+      const response = await axios.get(
+        "http://45.122.253.163:8891/api/reviews"
+      );
       setReviews(response.data);
     } catch (error) {
       toast.error("Lỗi khi lấy danh sách đánh giá!");
@@ -28,7 +30,7 @@ function Reviews() {
   const handleDelete = async (id) => {
     if (!window.confirm("Bạn có chắc chắn muốn xóa đánh giá này?")) return;
     try {
-      await axios.delete(`http://localhost:8080/api/reviews/${id}`);
+      await axios.delete(`http://45.122.253.163:8891/api/reviews/${id}`);
       setReviews(reviews.filter((review) => review.id !== id));
       toast.success("Đã xóa đánh giá thành công!");
     } catch (error) {

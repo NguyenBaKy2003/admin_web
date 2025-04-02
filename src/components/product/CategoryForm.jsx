@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const API_URL = "http://localhost:8080/api/categories";
+const API_URL = "https://45.122.253.163:8891/api/categories";
 
 function CategoriesForm() {
   const { id } = useParams();
@@ -121,7 +121,7 @@ function CategoriesForm() {
           <button
             type="button"
             className="bg-gray-400 text-white px-4 py-2 rounded"
-            onClick={() => navigate("/categories")}>
+            onClick={() => navigate("/admin/categories")}>
             Hủy
           </button>
         </div>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_URL = "http://localhost:8080/api/products";
+const API_URL = "http://45.122.253.163:8891/api/products";
 
 function ProductList() {
   const [products, setProducts] = useState([]);
@@ -208,7 +208,9 @@ function ProductList() {
               <div className="flex border-t border-gray-200">
                 <button
                   className="flex-1 py-3 bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition flex items-center justify-center"
-                  onClick={() => navigate(`/products/edit/${product.id}`)}>
+                  onClick={() =>
+                    navigate(`/admin/products/edit/${product.id}`)
+                  }>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4 mr-1"
@@ -318,7 +320,7 @@ function ProductList() {
                       <button
                         className="bg-white text-blue-600 border border-blue-600 px-3 py-1.5 text-xs rounded-md hover:bg-blue-50 transition flex items-center"
                         onClick={() =>
-                          navigate(`/products/edit/${product.id}`)
+                          navigate(`/admin/products/edit/${product.id}`)
                         }>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

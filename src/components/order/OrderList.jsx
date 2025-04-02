@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/orders";
+const API_URL = "https://45.122.253.163:8891/api/orders";
 
 function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -191,7 +191,7 @@ function OrderList() {
                       <div className="flex justify-center gap-2">
                         <button
                           className="px-3 py-1 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-md transition text-sm font-medium"
-                          onClick={() => navigate(`/orders/${order.id}`)}>
+                          onClick={() => navigate(`/admin/orders/${order.id}`)}>
                           Chi tiết
                         </button>
                         {order.status !== "DELIVERED" &&

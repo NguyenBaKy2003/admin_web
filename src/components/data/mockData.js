@@ -3,9 +3,9 @@ import axios from "axios";
 export const fetchMetrics = async () => {
   try {
     const [ordersRes, usersRes, reviewsRes] = await Promise.all([
-      axios.get("http://localhost:8080/api/orders"),
-      axios.get("http://localhost:8080/api/users"),
-      axios.get("http://localhost:8080/api/reviews"),
+      axios.get("http://45.122.253.163:8891/api/orders"),
+      axios.get("http://45.122.253.163:8891/api/users"),
+      axios.get("http://45.122.253.163:8891/api/reviews"),
     ]);
 
     const orders = ordersRes.data;
@@ -69,7 +69,7 @@ export const fetchRevenueData = async () => {
 // Fetch new customers from API
 export const fetchNewCustomers = async () => {
   try {
-    const response = await axios.get("http://localhost:8080/api/users");
+    const response = await axios.get("http://45.122.253.163:8891/api/users");
     return response.data.map((user) => ({
       id: user.id,
       name: `${user.firstName} ${user.lastName}`,
@@ -84,7 +84,7 @@ export const fetchNewCustomers = async () => {
 // Fetch pending reviews from API
 export const fetchPendingReviews = async () => {
   try {
-    const response = await axios.get("http://localhost:8080/api/reviews");
+    const response = await axios.get("http://45.122.253.163:8891/api/reviews");
     return response.data.map((review) => ({
       id: review.id,
       name: review.user
