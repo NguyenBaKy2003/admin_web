@@ -39,7 +39,7 @@ export const fetchMetrics = async () => {
 // Fetch revenue data from API
 export const fetchRevenueData = async () => {
   try {
-    const response = await axios.get("http://localhost:8080/api/orders");
+    const response = await axios.get("https://backend.kadoma.vn/api/orders");
     const orders = response.data;
 
     // Nhóm doanh thu theo ngày
@@ -69,7 +69,7 @@ export const fetchRevenueData = async () => {
 // Fetch new customers from API
 export const fetchNewCustomers = async () => {
   try {
-    const response = await axios.get("http://45.122.253.163:8891/api/users");
+    const response = await axios.get("https://backend.kadoma.vn/api/users");
     return response.data.map((user) => ({
       id: user.id,
       name: `${user.firstName} ${user.lastName}`,
@@ -84,7 +84,7 @@ export const fetchNewCustomers = async () => {
 // Fetch pending reviews from API
 export const fetchPendingReviews = async () => {
   try {
-    const response = await axios.get("http://45.122.253.163:8891/api/reviews");
+    const response = await axios.get("https://backend.kadoma.vn/api/reviews");
     return response.data.map((review) => ({
       id: review.id,
       name: review.user

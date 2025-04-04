@@ -779,7 +779,7 @@ function ProductEdit() {
             <Button
               onClick={() => {
                 toast.info("Đã hủy thao tác chỉnh sửa", toastConfig);
-                navigate("/products");
+                navigate("/admin/products");
               }}
               variant="outlined">
               Hủy

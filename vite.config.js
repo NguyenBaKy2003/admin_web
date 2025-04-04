@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/admin", // Đặt base là root để tránh lỗi đường dẫn trên cPanel
+  base: "/admin/", // Đặt base là root để tránh lỗi đường dẫn trên cPanel
   build: {
     rollupOptions: {
       output: {
