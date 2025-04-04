@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const API_URL = "https://45.122.253.163:8891/api/categories";
+const API_URL = "https://backend.kadoma.vn/api/categories";
 
 function CategoriesForm() {
   const { id } = useParams();
