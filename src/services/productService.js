@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api/products";
+const API_URL = "https://backend.kadoma.vn/api/products";
 
 // Lấy danh sách sản phẩm
 export const getProducts = async () => {

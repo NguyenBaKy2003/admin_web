@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_URL = "https://45.122.253.163:8891/api/orders";
+const API_URL = "https://backend.kadoma.vn/api/orders";
 const ORDER_STATUSES = [
   "PENDING",
   "PROCESSING",

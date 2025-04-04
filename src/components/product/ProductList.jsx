@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_URL = "http://45.122.253.163:8891/api/products";
+const API_URL = "https://backend.kadoma.vn/api/products";
 
 function ProductList() {
   const [products, setProducts] = useState([]);

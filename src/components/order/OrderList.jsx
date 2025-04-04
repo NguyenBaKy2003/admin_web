@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "https://45.122.253.163:8891/api/orders";
+const API_URL = "https://backend.kadoma.vn/api/orders";
 
 function OrderList() {
   const [orders, setOrders] = useState([]);

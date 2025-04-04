@@ -25,8 +25,8 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 
-const API_URL = "http://45.122.253.163:8891/api/products";
-const CATEGORY_API_URL = "http://45.122.253.163:8891/api/categories";
+const API_URL = "https://backend.kadoma.vn/api/products";
+const CATEGORY_API_URL = "https://backend.kadoma.vn/api/categories";
 
 function ProductForm() {
   const navigate = useNavigate();
@@ -133,7 +133,7 @@ function ProductForm() {
       await Promise.all(
         images.map((image) =>
           axios.post(
-            `http://45.122.253.163:8891/api/product-images/product/${productId}`,
+            `https://backend.kadoma.vn/api/product-images/product/${productId}`,
             image
           )
         )

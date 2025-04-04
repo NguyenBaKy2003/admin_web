@@ -24,7 +24,7 @@ import ImageIcon from "@mui/icons-material/Image";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 // API URLs
-const API_URL = "https://45.122.253.163:8891/api";
+const API_URL = "https://backend.kadoma.vn/api";
 const PRODUCTS_API = `${API_URL}/products`;
 const CATEGORY_API = `${API_URL}/categories`;
 const IMAGE_API = `${API_URL}/product-images`;

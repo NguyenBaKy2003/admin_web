@@ -3,9 +3,9 @@ import axios from "axios";
 export const fetchMetrics = async () => {
   try {
     const [ordersRes, usersRes, reviewsRes] = await Promise.all([
-      axios.get("http://45.122.253.163:8891/api/orders"),
-      axios.get("http://45.122.253.163:8891/api/users"),
-      axios.get("http://45.122.253.163:8891/api/reviews"),
+      axios.get("https://backend.kadoma.vn/api/orders"),
+      axios.get("https://backend.kadoma.vn/api/users"),
+      axios.get("https://backend.kadoma.vn/api/reviews"),
     ]);
 
     const orders = ordersRes.data;
