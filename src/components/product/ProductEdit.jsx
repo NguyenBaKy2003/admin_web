@@ -260,17 +260,14 @@ function ProductEdit() {
 
   const removeImage = (index) => {
     const imageToRemove = images[index];
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    const updatedImages = images.filter((_, i) => i !== index);
 
-    if (imageToRemove.primary && images.length > 1) {
-      setImages((prevImages) => {
-        const newImages = [...prevImages];
-        if (newImages.length > 0) {
-          newImages[0].primary = true;
-        }
-        return newImages;
-      });
+    // Nếu ảnh bị xóa là ảnh chính, gán ảnh đầu tiên còn lại là ảnh chính
+    if (imageToRemove.primary && updatedImages.length > 0) {
+      updatedImages[0].primary = true;
     }
+
+    setImages(updatedImages);
     toast.info("Đã xóa hình ảnh", toastConfig);
   };
 
@@ -292,7 +289,13 @@ function ProductEdit() {
       await Promise.all(
         images
           .filter((img) => !img.isNew)
-          .map((image) => axios.put(`${IMAGE_API}/${image.id}`, image))
+          .map((image) =>
+            axios.put(`${IMAGE_API}/${image.id}`, {
+              url: image.url,
+              altText: image.altText,
+              isPrimary: image.primary, // thêm dòng này nếu thiếu
+            })
+          )
       );
 
       await Promise.all(
@@ -302,7 +305,7 @@ function ProductEdit() {
             axios.post(`${IMAGE_API}/product/${id}`, {
               url: image.url,
               altText: image.altText,
-              primary: image.primary,
+              isPrimary: image.primary,
             })
           )
       );
