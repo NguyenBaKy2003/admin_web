@@ -98,38 +98,41 @@ function ProductForm() {
     setFormData({ ...formData, category: "" });
   };
 
+  // Thêm ảnh
   const addImage = () => {
     if (!imageUrl.trim()) return;
 
     const alreadyHasPrimary = images.some((img) => img.primary);
 
-    setImages([
-      ...images,
-      {
-        url: imageUrl,
-        altText,
-        primary: !alreadyHasPrimary, // chỉ ảnh đầu tiên hoặc khi chưa có ảnh chính
-      },
-    ]);
+    const newImage = {
+      url: imageUrl,
+      altText,
+      primary: !alreadyHasPrimary, // Nếu chưa có ảnh chính thì đây là ảnh chính
+    };
 
+    setImages([...images, newImage]);
     setImageUrl("");
     setAltText("");
   };
 
+  // Đặt ảnh chính
   const setPrimaryImage = (index) => {
     const updatedImages = images.map((img, i) => ({
       ...img,
-      primary: i === index,
+      primary: i === index, // Chỉ ảnh được chọn là ảnh chính
     }));
+
     setImages(updatedImages);
   };
 
+  // Xóa ảnh
   const removeImage = (index) => {
+    const isPrimary = images[index].primary;
     const updatedImages = images.filter((_, i) => i !== index);
 
-    // Nếu ảnh bị xóa là ảnh chính, gán ảnh đầu tiên còn lại (nếu có) là ảnh chính
-    if (images[index].primary && updatedImages.length > 0) {
-      updatedImages[0].primary = true;
+    // Nếu ảnh bị xóa là ảnh chính, gán lại ảnh đầu tiên làm ảnh chính nếu có
+    if (isPrimary && updatedImages.length > 0) {
+      updatedImages[0] = { ...updatedImages[0], primary: true };
     }
 
     setImages(updatedImages);
