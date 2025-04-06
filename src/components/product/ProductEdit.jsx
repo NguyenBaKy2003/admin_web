@@ -231,16 +231,18 @@ function ProductEdit() {
     }
 
     setImages((prevImages) => {
+      // Kiểm tra xem trong danh sách ảnh đã có ảnh chính chưa
       const hasPrimary = prevImages.some((img) => img.primary);
-      return [
-        ...prevImages,
-        {
-          url: imageUrl,
-          altText: altText || imageUrl.split("/").pop(),
-          primary: !hasPrimary,
-          isNew: true,
-        },
-      ];
+
+      // Nếu đã có ảnh chính, ảnh mới sẽ có primary = false
+      const newImage = {
+        url: imageUrl,
+        altText: altText || imageUrl.split("/").pop(),
+        primary: !hasPrimary, // Nếu chưa có ảnh chính, ảnh mới sẽ là primary: true
+        isNew: true,
+      };
+
+      return [...prevImages, newImage];
     });
 
     setImageUrl("");
@@ -260,14 +262,17 @@ function ProductEdit() {
 
   const removeImage = (index) => {
     const imageToRemove = images[index];
-    const updatedImages = images.filter((_, i) => i !== index);
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
 
-    // Nếu ảnh bị xóa là ảnh chính, gán ảnh đầu tiên còn lại là ảnh chính
-    if (imageToRemove.primary && updatedImages.length > 0) {
-      updatedImages[0].primary = true;
+    if (imageToRemove.primary && images.length > 1) {
+      setImages((prevImages) => {
+        const newImages = [...prevImages];
+        if (newImages.length > 0) {
+          newImages[0].primary = true;
+        }
+        return newImages;
+      });
     }
-
-    setImages(updatedImages);
     toast.info("Đã xóa hình ảnh", toastConfig);
   };
 
@@ -289,13 +294,7 @@ function ProductEdit() {
       await Promise.all(
         images
           .filter((img) => !img.isNew)
-          .map((image) =>
-            axios.put(`${IMAGE_API}/${image.id}`, {
-              url: image.url,
-              altText: image.altText,
-              isPrimary: image.primary, // thêm dòng này nếu thiếu
-            })
-          )
+          .map((image) => axios.put(`${IMAGE_API}/${image.id}`, image))
       );
 
       await Promise.all(
@@ -305,7 +304,7 @@ function ProductEdit() {
             axios.post(`${IMAGE_API}/product/${id}`, {
               url: image.url,
               altText: image.altText,
-              isPrimary: image.primary,
+              primary: image.primary,
             })
           )
       );

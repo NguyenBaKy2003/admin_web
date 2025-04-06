@@ -99,11 +99,19 @@ function ProductForm() {
   };
 
   const addImage = () => {
-    if (!imageUrl) return;
+    if (!imageUrl.trim()) return;
+
+    const alreadyHasPrimary = images.some((img) => img.primary);
+
     setImages([
       ...images,
-      { url: imageUrl, altText, primary: images.length === 0 },
+      {
+        url: imageUrl,
+        altText,
+        primary: !alreadyHasPrimary, // chỉ ảnh đầu tiên hoặc khi chưa có ảnh chính
+      },
     ]);
+
     setImageUrl("");
     setAltText("");
   };
@@ -117,7 +125,14 @@ function ProductForm() {
   };
 
   const removeImage = (index) => {
-    setImages(images.filter((_, i) => i !== index));
+    const updatedImages = images.filter((_, i) => i !== index);
+
+    // Nếu ảnh bị xóa là ảnh chính, gán ảnh đầu tiên còn lại (nếu có) là ảnh chính
+    if (images[index].primary && updatedImages.length > 0) {
+      updatedImages[0].primary = true;
+    }
+
+    setImages(updatedImages);
   };
 
   const addProductDetail = () => {
