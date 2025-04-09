@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getAuthHeader } from "../data/authHeader.js"; // <-- import hàm auth
 
 const API_URL = "https://backend.kadoma.vn/api/users";
 
@@ -16,7 +17,7 @@ function CustomersList() {
   const fetchCustomers = () => {
     setLoading(true);
     axios
-      .get(API_URL)
+      .get(API_URL, getAuthHeader()) // <-- thêm token ở đây
       .then((res) => {
         setCustomers(res.data);
         setLoading(false);
@@ -30,7 +31,7 @@ function CustomersList() {
   const deleteCustomer = (id) => {
     if (window.confirm("Bạn có chắc chắn muốn xóa khách hàng này?")) {
       axios
-        .delete(`${API_URL}/${id}`)
+        .delete(`${API_URL}/${id}`, getAuthHeader()) // <-- thêm token ở đây
         .then(() => {
           toast.success("Xóa khách hàng thành công!");
           setCustomers(customers.filter((customer) => customer.id !== id));

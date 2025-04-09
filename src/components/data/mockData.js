@@ -1,30 +1,31 @@
 import axios from "axios";
+import { getAuthHeader } from "../data/authHeader.js"; // hoặc điều chỉnh lại path
 
+// Lấy tổng hợp số liệu
 export const fetchMetrics = async () => {
   try {
     const [ordersRes, usersRes, reviewsRes] = await Promise.all([
-      axios.get("https://backend.kadoma.vn/api/orders"),
-      axios.get("https://backend.kadoma.vn/api/users"),
-      axios.get("https://backend.kadoma.vn/api/reviews"),
+      axios.get("https://backend.kadoma.vn/api/orders", getAuthHeader()),
+      axios.get("https://backend.kadoma.vn/api/users", getAuthHeader()),
+      axios.get("https://backend.kadoma.vn/api/reviews", getAuthHeader()),
     ]);
 
     const orders = ordersRes.data;
 
-    // Tính tổng doanh thu từ danh sách đơn hàng
     const totalRevenue = orders.reduce(
       (sum, order) => sum + order.totalAmount,
       0
     );
-    const formattedRevenue = new Intl.NumberFormat("en-US", {
+    const formattedRevenue = new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
     }).format(totalRevenue);
 
     return {
-      totalRevenue: formattedRevenue, // Doanh thu tổng, làm tròn 2 số thập phân
-      totalOrders: orders.length, // Tổng số đơn hàng
-      totalCustomers: usersRes.data.length, // Tổng số khách hàng
-      totalReviews: reviewsRes.data.length, // Tổng số đánh giá
+      totalRevenue: formattedRevenue,
+      totalOrders: orders.length,
+      totalCustomers: usersRes.data.length,
+      totalReviews: reviewsRes.data.length,
     };
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu tổng hợp:", error);
@@ -36,24 +37,25 @@ export const fetchMetrics = async () => {
     };
   }
 };
-// Fetch revenue data from API
+
+// Lấy dữ liệu doanh thu theo ngày
 export const fetchRevenueData = async () => {
   try {
-    const response = await axios.get("https://backend.kadoma.vn/api/orders");
+    const response = await axios.get(
+      "https://backend.kadoma.vn/api/orders",
+      getAuthHeader()
+    );
     const orders = response.data;
 
-    // Nhóm doanh thu theo ngày
     const revenueByDate = {};
-
     orders.forEach((order) => {
-      const date = order.orderDate.split("T")[0]; // YYYY-MM-DD
+      const date = order.orderDate.split("T")[0];
       if (!revenueByDate[date]) {
         revenueByDate[date] = 0;
       }
       revenueByDate[date] += order.totalAmount;
     });
 
-    // Chuyển đổi thành mảng để hiển thị trên biểu đồ
     return Object.keys(revenueByDate)
       .map((date) => ({
         date,
@@ -66,10 +68,13 @@ export const fetchRevenueData = async () => {
   }
 };
 
-// Fetch new customers from API
+// Lấy danh sách khách hàng mới
 export const fetchNewCustomers = async () => {
   try {
-    const response = await axios.get("https://backend.kadoma.vn/api/users");
+    const response = await axios.get(
+      "https://backend.kadoma.vn/api/users",
+      getAuthHeader()
+    );
     return response.data.map((user) => ({
       id: user.id,
       name: `${user.firstName} ${user.lastName}`,
@@ -81,10 +86,13 @@ export const fetchNewCustomers = async () => {
   }
 };
 
-// Fetch pending reviews from API
+// Lấy đánh giá chờ duyệt
 export const fetchPendingReviews = async () => {
   try {
-    const response = await axios.get("https://backend.kadoma.vn/api/reviews");
+    const response = await axios.get(
+      "https://backend.kadoma.vn/api/reviews",
+      getAuthHeader()
+    );
     return response.data.map((review) => ({
       id: review.id,
       name: review.user
@@ -99,7 +107,7 @@ export const fetchPendingReviews = async () => {
       productName: review.product?.name || "Sản phẩm không xác định",
       productImage:
         review.product?.primaryImage?.url || "https://via.placeholder.com/100",
-      rating: review.rating || 0, // Nếu không có thì hiển thị 0 sao
+      rating: review.rating || 0,
       reviewDate: review.reviewDate
         ? new Date(review.reviewDate).toLocaleDateString("vi-VN")
         : "Không xác định",
